@@ -1,19 +1,20 @@
-package com.altop.githubuserapp.adapter
+package com.altop.githubuserapp.ui.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.altop.githubuserapp.data.model.GithubUser
 import com.altop.githubuserapp.databinding.ItemGithubUserBinding
-import com.altop.githubuserapp.model.User
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
-class ListUserAdapter(private val listUser: ArrayList<User>) :
+class ListUserAdapter(private val listUser: List<GithubUser>) :
   RecyclerView.Adapter<ListUserAdapter.ListViewHolder>() {
   
   private lateinit var onItemClickCallback: OnItemClickCallback
   
   interface OnItemClickCallback {
-    fun onItemClicked(data: User)
+    fun onItemClicked(data: GithubUser)
   }
   
   fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
@@ -30,14 +31,14 @@ class ListUserAdapter(private val listUser: ArrayList<User>) :
   override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
     val user = listUser[position]
     
-    Glide.with(holder.itemView.context).load(user.avatar).circleCrop().into(holder.binding.avatar)
+    Glide.with(holder.itemView.context).load(user.avatarUrl).circleCrop()
+      .transition(DrawableTransitionOptions.withCrossFade()).into(holder.binding.avatar)
     
-    "${user.name} (${user.username})".also { holder.binding.itemUsername.text = it }
-    holder.binding.itemCompany.text = user.company
-    holder.binding.itemLocation.text = user.location
+    holder.binding.itemUsername.text = user.login
     
     holder.itemView.setOnClickListener { onItemClickCallback.onItemClicked(listUser[holder.adapterPosition]) }
   }
   
   override fun getItemCount(): Int = listUser.size
+  
 }

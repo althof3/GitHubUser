@@ -4,21 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailUserActivity">
+    tools:context=".ui.detailUser.DetailUserActivity">
+
 
     <ImageView
         android:id="@+id/avatar"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_marginTop="16dp"
+        android:contentDescription="@string/avatar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@tools:sample/avatars"
-        android:contentDescription="@string/avatar" />
+        tools:src="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/item_username"
+        android:id="@+id/tv_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -31,7 +32,7 @@
         tools:text="@string/user_name" />
 
     <TextView
-        android:id="@+id/item_name"
+        android:id="@+id/tv_name"
         style="@style/TextTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,11 +41,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.507"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/item_username"
-        tools:text="@string/user_name" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_username"
+        tools:text="@string/name" />
 
     <TextView
-        android:id="@+id/item_company"
+        android:id="@+id/tv_company"
         style="@style/TextBody"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -54,11 +55,11 @@
         app:drawableStartCompat="@drawable/work_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/item_name"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name"
         tools:text="@string/user_company" />
 
     <TextView
-        android:id="@+id/item_location"
+        android:id="@+id/tv_location"
         style="@style/TextBody"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -67,7 +68,7 @@
         app:drawableStartCompat="@drawable/location_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/item_company"
+        app:layout_constraintTop_toBottomOf="@+id/tv_company"
         tools:text="@string/user_location" />
 
     <LinearLayout
@@ -79,32 +80,71 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/item_location">
+        app:layout_constraintTop_toBottomOf="@+id/tv_location">
+
 
         <TextView
-            android:id="@+id/user_repository"
+            android:id="@+id/tv_repository"
             style="@style/TextBody"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/repository" />
+            android:gravity="center_vertical"
+            app:drawableStartCompat="@drawable/ic_repo"
+            tools:text="@string/repository" />
 
         <TextView
-            android:id="@+id/user_following"
+            android:id="@+id/tv_following"
             style="@style/TextBody"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
-            android:text="@string/user_following" />
+            android:gravity="center_vertical"
+            app:drawableStartCompat="@drawable/ic_person_add"
+            tools:text="@string/user_following" />
 
         <TextView
-            android:id="@+id/user_follower"
+            android:id="@+id/tv_follower"
             style="@style/TextBody"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/user_follower" />
+            android:gravity="center_vertical"
+            app:drawableStartCompat="@drawable/ic_group"
+            tools:text="@string/user_follower" />
     </LinearLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@color/white"
+        android:contentDescription="@string/follower"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:tabTextColor="@color/black" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabs" />
+
+    <ProgressBar
+        android:id="@+id/progres_bar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

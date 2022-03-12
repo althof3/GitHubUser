@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.altop.githubuserapp.databinding.ActivitySplashScreenBinding
+import com.altop.githubuserapp.ui.main.MainActivity
 
 class SplashScreenActivity : AppCompatActivity() {
   private lateinit var bind: ActivitySplashScreenBinding
