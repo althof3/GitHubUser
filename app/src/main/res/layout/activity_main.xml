@@ -6,58 +6,32 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.MainActivity">
 
-    <FrameLayout
-        android:id="@+id/frameLayout"
+    <SearchView
+        android:id="@+id/et_query"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/rv_users"
+        android:background="@drawable/searchview_bg"
+        android:iconifiedByDefault="false"
+        android:inputType="text"
+        android:queryBackground="@android:color/transparent"
+        android:queryHint="@string/cari"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.textfield.TextInputLayout
-
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColorHint="#C8C8C8"
-            app:boxStrokeColor="#FF9C9C">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/et_query"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="@string/cari"
-                android:maxLines="1"
-                android:textColorHint="#616161"
-                tools:ignore="TextContrastCheck" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <ImageView
-            android:id="@+id/btn_search"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|center_vertical"
-            android:layout_marginEnd="16dp"
-            android:contentDescription="@string/icon"
-            android:src="@drawable/ic_search"
-            android:translationY="2dp"
-            tools:ignore="ImageContrastCheck" />
-    </FrameLayout>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_users"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
+        app:layout_constraintTop_toBottomOf="@+id/et_query"
         app:layout_constraintVertical_bias="0.0"
         tools:listitem="@layout/item_github_user" />
 
@@ -65,8 +39,8 @@
         android:id="@+id/progres_bar"
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
-        android:visibility="gone"
         android:layout_height="wrap_content"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/rv_users"
         app:layout_constraintStart_toStartOf="@+id/rv_users"

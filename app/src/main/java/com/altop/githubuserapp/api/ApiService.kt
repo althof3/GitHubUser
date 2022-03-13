@@ -5,31 +5,26 @@ import com.altop.githubuserapp.data.model.GithubUser
 import com.altop.githubuserapp.data.model.SearchResponse
 import retrofit2.Call
 import retrofit2.http.GET
-import retrofit2.http.Headers
 import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface ApiService {
   @GET("search/users")
-  @Headers("Authorization: token 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")
   fun getSearchUsers(
     @Query("q") query: String
   ): Call<SearchResponse>
   
   @GET("users/{username}")
-  @Headers("Authorization: token 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")
   fun getUserDetail(
     @Path("username") username: String
   ): Call<DetailUserResponse>
   
   @GET("users/{username}/followers")
-  @Headers("Authorization: token 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")
   fun getUserFollowers(
     @Path("username") username: String
   ): Call<List<GithubUser>>
   
   @GET("users/{username}/following")
-  @Headers("Authorization: token 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")
   fun getUserFollowing(
     @Path("username") username: String
   ): Call<List<GithubUser>>
