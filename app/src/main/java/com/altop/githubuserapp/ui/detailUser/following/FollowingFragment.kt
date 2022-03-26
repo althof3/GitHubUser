@@ -68,6 +68,8 @@ class FollowingFragment : Fragment(R.layout.fragment_follow) {
       override fun onItemClicked(data: GithubUser) {
         Intent(activity, DetailUserActivity::class.java).also {
           it.putExtra(DetailUserActivity.EXTRA_USERNAME, data.login)
+          it.putExtra(DetailUserActivity.EXTRA_ID, data.id)
+          it.putExtra(DetailUserActivity.EXTRA_AVATAR, data.avatarUrl)
           startActivity(it)
         }
       }

@@ -11,6 +11,10 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class DetailUserActivity : AppCompatActivity() {
   
@@ -18,16 +22,19 @@ class DetailUserActivity : AppCompatActivity() {
   private val detailViewModel by viewModels<DetailUserViewModel>()
   
   
-  
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     bind = ActivityDetailUserBinding.inflate(layoutInflater)
     setContentView(bind.root)
-    supportActionBar?.title = "Detail User"
+    supportActionBar?.title = TITLE
     
     val bundle = Bundle()
     
     val username = intent.getStringExtra(EXTRA_USERNAME) as String
+    val avatarUrl = intent.getStringExtra(EXTRA_AVATAR) as String
+    val id = intent.getIntExtra(EXTRA_ID, 0)
+    
+    
     detailViewModel.setUser(username)
     detailViewModel.user.observe(this) {
       if (it != null) {
@@ -38,12 +45,9 @@ class DetailUserActivity : AppCompatActivity() {
           tvName.text = it.name
           tvCompany.text = it.company ?: "Company"
           tvLocation.text = it.location ?: "Location"
-          tvRepository.text =
-            resources.getString(R.string.template_repositories, it.repos.toString())
-          tvFollower.text =
-            resources.getString(R.string.template_followers, it.followers.toString())
-          tvFollowing.text =
-            resources.getString(R.string.template_following, it.following.toString())
+          tvRepository.text = it.repos.toString()
+          tvFollower.text = it.followers.toString()
+          tvFollowing.text = it.following.toString()
         }
       }
     }
@@ -59,6 +63,32 @@ class DetailUserActivity : AppCompatActivity() {
           window.decorView.rootView, snackBarText, Snackbar.LENGTH_SHORT
         ).show()
       }
+    }
+    
+    var _isChecked = false
+    CoroutineScope(Dispatchers.IO).launch {
+      val count = detailViewModel.checkUser(id)
+      withContext(Dispatchers.Main) {
+        if (count != null) {
+          if (count > 0) {
+            bind.toggleFavorite.isChecked = true
+            _isChecked = true
+          } else {
+            bind.toggleFavorite.isChecked = false
+            _isChecked = false
+          }
+          
+        }
+      }
+    }
+    
+    bind.toggleFavorite.setOnClickListener {
+      _isChecked = !_isChecked
+      
+      if (_isChecked) detailViewModel.addToFavorite(username, id, avatarUrl)
+      else detailViewModel.removeFavoriteUser(id)
+      
+      bind.toggleFavorite.isChecked = _isChecked
     }
     
     bind.apply {
@@ -78,6 +108,10 @@ class DetailUserActivity : AppCompatActivity() {
   
   companion object {
     const val EXTRA_USERNAME = "EXTRA_USERNAME"
+    const val EXTRA_ID = "EXTRA_ID"
+    const val EXTRA_AVATAR = "EXTRA_AVATAR"
+    
+    const val TITLE = "Detail User"
     
     @StringRes
     private val TAB_TITLES = intArrayOf(

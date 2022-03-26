@@ -78,42 +78,84 @@
 
         <TextView
             android:id="@+id/tv_following"
-            style="@style/TextBody"
+            style="@style/TextTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_weight="1"
             android:gravity="center_vertical"
-            app:drawableStartCompat="@drawable/ic_person_add"
+            android:textColor="@color/orange"
+            app:layout_constraintEnd_toEndOf="@+id/following"
+            app:layout_constraintStart_toStartOf="@+id/following"
+            app:layout_constraintTop_toBottomOf="@+id/tv_location"
+            tools:text="@string/number" />
+
+        <TextView
+            android:id="@+id/following"
+            style="@style/TextTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:textColor="@color/orange"
             app:layout_constraintEnd_toEndOf="@+id/tv_location"
             app:layout_constraintStart_toStartOf="@+id/tv_location"
-            app:layout_constraintTop_toBottomOf="@+id/tv_location"
-            tools:text="@string/user_following" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_following"
+            android:text="@string/following" />
 
         <TextView
             android:id="@+id/tv_follower"
-            style="@style/TextBody"
+            style="@style/TextTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:textColor="@color/orange"
+            app:layout_constraintEnd_toEndOf="@+id/follower"
+            app:layout_constraintStart_toEndOf="@+id/following"
+            app:layout_constraintStart_toStartOf="@+id/follower"
+            app:layout_constraintTop_toBottomOf="@+id/tv_location"
+            tools:text="@string/number" />
+
+        <TextView
+            android:id="@+id/follower"
+            style="@style/TextTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
+            android:textColor="@color/orange"
             android:gravity="center_vertical"
-            app:drawableStartCompat="@drawable/ic_group"
-            app:layout_constraintStart_toEndOf="@+id/tv_following"
-            app:layout_constraintTop_toTopOf="@+id/tv_following"
-            tools:text="@string/user_follower" />
+            app:layout_constraintStart_toEndOf="@+id/following"
+            app:layout_constraintTop_toBottomOf="@+id/tv_follower"
+            android:text="@string/follower" />
 
         <TextView
             android:id="@+id/tv_repository"
-            style="@style/TextBody"
+            style="@style/TextTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="center_vertical"
+            android:textColor="@color/orange"
+            app:layout_constraintBottom_toTopOf="@+id/repository"
+            app:layout_constraintEnd_toEndOf="@+id/repository"
+            app:layout_constraintStart_toStartOf="@+id/repository"
+            app:layout_constraintTop_toBottomOf="@+id/tv_location"
+            tools:text="@string/number" />
+
+        <TextView
+            android:id="@+id/repository"
+            style="@style/TextTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:gravity="center_vertical"
-            app:drawableStartCompat="@drawable/ic_repo"
-            app:layout_constraintEnd_toStartOf="@+id/tv_following"
-            app:layout_constraintTop_toTopOf="@+id/tv_following"
-            tools:text="@string/repository" />
+            android:textColor="@color/orange"
+            app:layout_constraintEnd_toStartOf="@+id/following"
+            app:layout_constraintTop_toBottomOf="@+id/tv_repository"
+            android:text="@string/repository"/>
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
@@ -124,7 +166,7 @@
             android:contentDescription="@string/follower"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_following"
+            app:layout_constraintTop_toBottomOf="@+id/following"
             app:tabTextColor="@color/black" />
 
         <androidx.viewpager2.widget.ViewPager2
@@ -148,6 +190,20 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <ToggleButton
+            android:id="@+id/toggle_favorite"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginEnd="-8dp"
+            android:background="@drawable/favorite_toggle"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:textOff=""
+            android:textOn=""
+            app:layout_constraintBottom_toBottomOf="@+id/avatar"
+            app:layout_constraintEnd_toEndOf="@+id/avatar" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
